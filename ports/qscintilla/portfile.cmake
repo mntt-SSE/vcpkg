@@ -49,5 +49,10 @@ endif()
 
 vcpkg_copy_pdbs()
 
+file(
+    COPY ${CMAKE_CURRENT_LIST_DIR}/qscintillaConfig.cmake
+    DESTINATION ${CURRENT_PACKAGES_DIR}/share
+)
+
 # Handle copyright
 file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/${PORT} RENAME copyright)
