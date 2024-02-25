@@ -7,11 +7,23 @@ vcpkg_from_bitbucket(
     PATCHES
 )
 
+vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
+    FEATURES
+        force-single-point-math ODE_SINGLE_PRECISION
+)
+
+if (ODE_SINGLE_PRECISION)
+    set(ODE_DOUBLE_PRECISION OFF)
+else()
+    set(ODE_DOUBLE_PRECISION ON)
+endif()
+
 vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}"
     OPTIONS
         -DODE_WITH_DEMOS=0
         -DODE_WITH_TESTS=0
+        -DODE_DOUBLE_PRECISION=${ODE_DOUBLE_PRECISION}
 )
 
 vcpkg_cmake_install()
